@@ -42,7 +42,7 @@ def create_state():
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        abort(400, {'message': 'Not a JSON'})
+        abort(Response('Not a JSON', 400))
     from models.state import State
     if "name" not in state.keys():
         abort(Response('Missing name', 400))
@@ -58,7 +58,7 @@ def update_state(state_id):
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        abort(400, {'message': 'Not a JSON'})
+        abort(Response('Not a JSON', 400))
     from models.state import State
     single_state = storage.get("State", state_id)
     if single_state is None:
