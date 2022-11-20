@@ -41,10 +41,10 @@ def create_state():
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        return "Not a JSON\n", 400
+        return "Not a JSON\n"
     from models.state import State
     if "name" not in state.keys():
-        return "Missing name\n", 400
+        return "Missing name\n"
     state_obj = State(**state)
     storage.new(state_obj)
     storage.save()
