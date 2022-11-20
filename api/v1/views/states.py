@@ -41,10 +41,10 @@ def create_state():
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        return jsonify("Not a JSON\n"), 400
+        return abort(400, 'Not a JSON')
     from models.state import State
     if "name" not in state.keys():
-        return jsonify("Missing name\n"), 400
+        return abort(400, 'Missing name')
     state_obj = State(**state)
     storage.new(state_obj)
     storage.save()
@@ -57,7 +57,7 @@ def update_state(state_id):
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        return jsonify("Not a JSON\n"), 400
+        return abort(400, 'Not a JSON')
     from models.state import State
     single_state = storage.get("State", state_id)
     if single_state is None:
