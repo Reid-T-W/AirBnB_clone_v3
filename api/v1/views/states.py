@@ -20,7 +20,8 @@ def states():
 def get_state(state_id):
     single_state = storage.get("State", state_id)
     if single_state is None:
-        abort(404)
+        # abort(404)
+        pass
     else:
         return jsonify(single_state.to_dict())
 
@@ -29,7 +30,8 @@ def get_state(state_id):
 def delete_state(state_id):
     single_state = storage.get("State", state_id)
     if single_state is None:
-        abort(404)
+        # abort(404)
+        pass
     else:
         storage.delete(single_state)
         storage.save()
@@ -62,7 +64,8 @@ def update_state(state_id):
     from models.state import State
     single_state = storage.get("State", state_id)
     if single_state is None:
-        abort(404)
+        # abort(404)
+        pass
     for key, value in state.items():
         if key is "id" or key is "created_at" or key is "updated_at":
             pass
