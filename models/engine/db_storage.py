@@ -88,7 +88,10 @@ class DBStorage:
                         filter(classes[cls].id == id)
         else:
             result = self.__session.query(cls).filter(cls.id == id)
-        return (result[0])
+        try:
+            return (result[0])
+        except Exception:
+            return (None)
 
     def count(self, cls=None):
         """
