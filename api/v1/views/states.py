@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """This module is a blueprint"""
 from api.v1.views import app_views
-from flask import jsonify, render_template, abort, redirect, url_for, request
+from flask import jsonify, render_template, abort, \
+                    redirect, url_for, request, Response
 from models import storage
 import json
 
@@ -19,7 +20,7 @@ def states():
 def get_state(state_id):
     single_state = storage.get("State", state_id)
     if single_state is None:
-        return abort(404)
+        abort(404)
     else:
         return jsonify(single_state.to_dict())
 
@@ -28,7 +29,7 @@ def get_state(state_id):
 def delete_state(state_id):
     single_state = storage.get("State", state_id)
     if single_state is None:
-        return abort(404)
+        abort(404)
     else:
         storage.delete(single_state)
         storage.save()
@@ -41,10 +42,10 @@ def create_state():
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        return abort(4, {'message': 'Not a JSON'})
+        abort(400, {'message': 'Not a JSON'})
     from models.state import State
     if "name" not in state.keys():
-        return abort(4, {'message': 'Missing name'})
+        abort(Response('Missing name', 400))
     state_obj = State(**state)
     storage.new(state_obj)
     storage.save()
@@ -57,11 +58,11 @@ def update_state(state_id):
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        return abort(4, {'message': 'Not a JSON'})
+        abort(400, {'message': 'Not a JSON'})
     from models.state import State
     single_state = storage.get("State", state_id)
     if single_state is None:
-        return abort(404)
+        abort(404)
     for key, value in state.items():
         if key is "id" or key is "created_at" or key is "updated_at":
             pass
