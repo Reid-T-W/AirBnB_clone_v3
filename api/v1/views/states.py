@@ -2,7 +2,8 @@
 """This module is a blueprint"""
 from api.v1.views import app_views
 from flask import jsonify, render_template, abort, \
-                    redirect, url_for, request, Response
+                    redirect, url_for, request, Response, \
+                    make_response
 from models import storage
 import json
 
@@ -42,16 +43,12 @@ def create_state():
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        error = {
-            "error": "Not a JSON"
-        }
-        return error, 400
+        resp = make_response("Not a JSON", 400)
+        return resp
     from models.state import State
     if "name" not in state.keys():
-        error = {
-            "error": "Missing name"
-        }
-        return error, 400
+        resp = make_response("Missing name", 400)
+        return resp
     state_obj = State(**state)
     storage.new(state_obj)
     storage.save()
@@ -64,10 +61,8 @@ def update_state(state_id):
         state = request.get_json()
         json.dumps(state)
     except Exception:
-        error = {
-            "error": "Not a JSON"
-        }
-        return error, 400
+        resp = make_response("Missing name", 400)
+        return resp
     from models.state import State
     single_state = storage.get("State", state_id)
     if single_state is None:
