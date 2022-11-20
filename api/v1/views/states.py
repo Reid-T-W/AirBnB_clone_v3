@@ -67,7 +67,8 @@ def update_state(state_id):
         if key is "id" or key is "created_at" or key is "updated_at":
             pass
         else:
-            setattr(single_state, key, value)
+            pass
+            # setattr(single_state, key, value)
     storage.save()
     updated_state = storage.get("State", state_id)
     return jsonify(updated_state.to_dict()), 200
