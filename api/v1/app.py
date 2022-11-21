@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is a flask app"""
+"""This is the main flask app, it registers a blueprint"""
 from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
