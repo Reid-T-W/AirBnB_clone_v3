@@ -9,7 +9,7 @@ from models import storage
 import json
 
 
-@app_views.route("/places/<city_id>/places")
+@app_views.route("/cities/<city_id>/places")
 def places(city_id):
     single_city = storage.get("City", city_id)
     if single_city is None:
