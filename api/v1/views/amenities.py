@@ -61,7 +61,7 @@ def update_amenity(amenity_id):
         amenity = request.get_json()
         json.dumps(amenity)
     except Exception:
-        resp = make_response(jsonify("Missing name"), 400)
+        resp = make_response(jsonify("Not a JSON"), 400)
         return resp
     from models.amenity import Amenity
     single_amenity = storage.get("Amentiy", amenity_id)

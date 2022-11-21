@@ -64,7 +64,7 @@ def update_user(user_id):
         user = request.get_json()
         json.dumps(user)
     except Exception:
-        resp = make_response(jsonify("Missing name"), 400)
+        resp = make_response(jsonify("Not a JSON"), 400)
         return resp
     from models.user import User
     single_user = storage.get("User", user_id)

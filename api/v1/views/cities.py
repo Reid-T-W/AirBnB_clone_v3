@@ -70,7 +70,7 @@ def update_city(city_id):
         city = request.get_json()
         json.dumps(city)
     except Exception:
-        resp = make_response(jsonify("Missing name"), 400)
+        resp = make_response(jsonify("Not a JSON"), 400)
         return resp
     from models.city import City
     single_city = storage.get("City", city_id)
