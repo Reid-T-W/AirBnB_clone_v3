@@ -83,7 +83,7 @@ def update_review(review_id):
     single_review = storage.get("Review", review_id)
     if single_review is None:
         abort(404)
-    for key, value in city.items():
+    for key, value in review.items():
         if key is "id" or key is "created_at" or key is "updated_at" \
           or key is "user_id" or key is "place_id":
             pass
